@@ -1,5 +1,4 @@
-﻿Imports Microsoft.VisualBasic
-Imports System.Collections.Generic
+﻿Imports System.Collections.Generic
 Imports System.Windows
 Imports System.Windows.Data
 Imports System.Windows.Documents
@@ -15,6 +14,7 @@ Imports DevExpress.Data
 Namespace DXGrid_ConditionalFormatting
 	Partial Public Class Window1
 		Inherits Window
+
 		Private Const ItemsSourceRowCount As Integer = 10000
 		Private Const RefreshDataIntervalInMilliseconds As Integer = 1
 		Private Const UpdatedCellsCount As Integer = 10000
@@ -30,7 +30,7 @@ Namespace DXGrid_ConditionalFormatting
 				list.Add(New SampleData())
 			Next i
 			grid.ItemsSource = list
-			AddHandler Loaded, AddressOf Window1_Loaded
+			AddHandler Me.Loaded, AddressOf Window1_Loaded
 		End Sub
 
 		Private Sub Window1_Loaded(ByVal sender As Object, ByVal e As RoutedEventArgs)
@@ -44,7 +44,7 @@ Namespace DXGrid_ConditionalFormatting
 			For i As Integer = 0 To UpdatedCellsCount - 1
 				list(rnd.Next(list.Count)).SetValue(rnd.Next(properties.Count), rnd.Next(100000))
 			Next i
-			If (Not refreshQueued) Then
+			If Not refreshQueued Then
 				refreshQueued = True
 				grid.Dispatcher.BeginInvoke(New Action(AddressOf RefreshData), DispatcherPriority.ApplicationIdle)
 			End If
